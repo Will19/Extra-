@@ -1,0 +1,89 @@
+typedef struct l{int dado;
+					l *ant;
+					l *prox;
+}ListaE;
+
+Lista* InsereDE(Lista *L, int i){
+	Lista *K;
+	if(L==NULL){
+		L=(Lista*)malloc(sizeof(Lista));
+		L->ant=NULL;
+		L->prox=NULL;
+		L->dado=i;
+		return L;
+	}
+	K=(Lista*)malloc(sizeof(Lista));
+	K->dado=i;
+	K->prox=L;
+	K->ant=NULL;
+	L->ant=K;
+	return K;
+}
+
+Lista* buscaDE(Lista *L, int i){
+	Lista *K=L;
+	while(K!=NULL){
+		if(K->dado==i)
+			return K;
+		K=K->prox;
+	}
+	return NULL;
+}
+
+bool retiraDE(Lista *L, int i){
+	Lista* K;
+	K=busca(L, i);
+	if(K==NULL)
+		return false;
+	if(K->ant!=NULL)
+		K->ant->prox=K->prox;
+	if(K->prox!=NULL)
+		K->prox->ant=K->ant;
+	free(K);
+	K=NULL;
+	return true;
+}
+
+Lista* InsereDEC(Lista *L, int i){
+	Lista *K;
+	if(L==NULL){
+		L=(Lista*)malloc(sizeof(Lista));
+		L->ant=L;
+		L->prox=L;
+		L->dado=i;
+		return L;
+	}
+	K=(Lista*)malloc(sizeof(Lista));
+	K->dado=i;
+	K->prox=L;
+	K->ant=L->ant;
+	L->ant=K;
+	if(L->prox==L)
+		L->prox=K;
+	return K;
+}
+
+Lista* buscaDEC(Lista *L, int i){
+	Lista *K=L;
+	while(K!=NULL){
+		if(K->dado==i)
+			return K;
+		if(K->prox==L)
+			return NULL;
+		K=K->prox;
+	}
+}
+
+bool retiraDEC(Lista *L, int i){
+	Lista* K;
+	K=buscaDEC(L, i);
+	if(K==NULL)
+		return false;
+	if(K->ant==K)
+		L=NULL;
+	K->ant->prox=K->prox;
+	K->prox->ant=K->ant;
+	free(K);
+	K=NULL;
+	return true;
+}
