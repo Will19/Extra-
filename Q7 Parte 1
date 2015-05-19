@@ -1,0 +1,113 @@
+typedef struct lista{
+	int info;
+	lista *prox;
+}Lista;
+
+Lista* inicializa(){
+	return NULL;
+}
+
+Lista* insere(Lista *L, int x){
+	Lista novo=(Lista*)malloc(sizeof(Lista));
+	novo->info=x;
+	novo->prox=L;
+	return novo;
+}
+
+void percorre(Lista *L){
+	//Lista *P
+	//for(P=L; P!=NULL; P=P->prox) printf("%d", P->info);
+	Lista *K=L;
+	while(K!=NULL){
+		printf("%d", K->info);
+		K=K->prox;
+	}
+	printf("\n");
+}
+
+bool vazia(Lista *L){
+	if(L==NULL)
+		return true;
+	return false;
+}
+
+Lista* busca(Lista *L, int i){
+	Lista *K;
+	while(K!=NULL){
+		if(K->info==i)
+			break;
+		K=K->prox;
+	}
+	return K;
+}
+
+bool remove(Lista *L, int i){
+	Lista *K=busca(L, i), *l=L;
+	if(K==NULL)
+		return false;
+	while(l->prox!=K)
+		l=l->prox;
+	l->prox=K->prox;
+	free(K);
+	K=NULL;
+	return true;
+}
+
+void libera(Lista *L){
+	if(L==NULL)
+		return;
+	libera(L->prox)
+	free(L);
+	L=NULL;
+}
+
+int igual(Lista *l1, Lista *l2){
+     J=l1;
+     K=l2;
+     while(J!=NULL || K!=NULL){
+                   if(J->info!=K->info)
+                                       return 0;
+                   J=J->prox;
+                   K=K->prox;
+     }
+     if((J==NULL && K!=NULL)||(J!=NULL && K==NULL))
+                 return 0;
+     return 1;
+}
+
+Lista* copia(Lista *L){
+	Lista *K;
+	K=(Lista*)malloc(sizeof(Lista));
+	K=L;
+	return K;
+}
+
+Lista* TornaCircular(Lista *L){
+	Lista *K;
+	if(L==NULL)
+		return NULL;
+	K=L;
+	while(K->prox!+NULL)
+		K=K->prox;
+	K->prox=L;
+	return L;
+}
+
+Lista* TornaLinear(Lista *L){
+	Lista *K;
+	if(L==NULL)
+		return NULL;
+	K=L;
+	while(K->prox!=L)
+		K=K->prox;
+	K->prox=NULL;
+	return L;
+}
+
+int TamanhoCircular(Lista *L){
+	int i=0;
+	Lista *K;
+	for(K=L; K!=NULL; K=K->prox)
+		i++;
+	return i;
+}
