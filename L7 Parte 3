@@ -1,0 +1,3 @@
+7. Como a variável DadoNoInicio não é um ponteiro, ela contém somente o valor do dado de lista. Assim, quando lista é liberada, ele permanece com ele. Como lista é passada por parâmetro, ela é modificada e passa a ser o segundo da lista dada. Logo, está correto.
+
+8. A função torna nulo o último nodo da lista, retirando-o dela sem utilizar a função free.
